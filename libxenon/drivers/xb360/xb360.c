@@ -508,7 +508,11 @@ int xenon_get_console_type()
 			return REV_TRINITY;
 	}
 	else if(consoleVersion >= 0x5851)
+	{
+		if (PCIBridgeRevisionID >= 0x70 && sfcx_readreg(SFCX_PHISON) != 0)
+			return REV_WINCHESTER_MMC;
 		return REV_WINCHESTER;
+	}
     return REV_UNKNOWN;
 }
 

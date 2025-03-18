@@ -48,10 +48,10 @@ static void xenos_ana_write(int addr, uint32_t reg)
 		printf("\nxenos_ana_write - addr: 0x%X reg: 0x%X - FAILED!\n");
 }
 
-static int isCorona()
+static int isCoronaOrWinchester()
 {
 	int type = xenon_get_console_type();
-	if (type == REV_CORONA || type == REV_CORONA_PHISON)
+	if (type >= REV_CORONA)
 		return 1;
 	return 0;
 }
@@ -601,7 +601,7 @@ void xenos_init(int videoMode)
 	xenos_id = xenon_get_XenosID();
 	printf("Xenos GPU ID=%04x\n", (unsigned int)xenos_id);
 
-	xenos_is_corona = isCorona();
+	xenos_is_corona = isCoronaOrWinchester();
 	if (xenos_is_corona)
 		printf("Detected Corona motherboard!\n");
 
