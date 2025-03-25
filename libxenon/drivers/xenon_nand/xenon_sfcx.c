@@ -580,8 +580,16 @@ int try_rawflash(char *filename)
 		return -1;
 	}
 
-    printf("\n * found '%s'. press power NOW if you don't want to flash the NAND.\n",filename);
-    delay(15);
+    // Display time countdown
+    int countdown_time = 15;
+    printf("\n * found '%s'. press power NOW if you don't want to flash the NAND.\nYou have %d seconds to consider.\n", filename, countdown_time);
+    for (int i = countdown_time; i >= 0; i-- ) {
+	printf("\rCount down time: %2d second(s)", i);
+	fflush(stdout);
+	delay(1);
+    }
+    printf("\n");
+    //delay(15);
 
 	printf(" * Checking NAND File to be of matching type...\n");
 
